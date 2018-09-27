@@ -10,24 +10,20 @@ export default class SearchBar extends Component {
     this.inputRef.focus()
   }
 
-  debounce = (fn, delay = 500) => {
-    let timeout
-    return (...args) => {
-      if (timeout) {
-        clearInterval(timeout)
-      }
-      timeout = setTimeout(() => {
-        fn(...args)
-        timeout = null
-      }, delay)
-    }
-  }
-
   render() {
     return (
       <input
+        placeholder="Search tabs, bookmarks, etc."
+        style={{
+          width: '100%',
+          border: 'none',
+          padding: 7,
+          fontSize: 15,
+          'box-sizing': 'border-box',
+          '-moz-box-sizing': 'border-box',
+        }}
         ref={(input) => (this.inputRef = input)}
-        onChange={(e) => this.debounce(this.props.onChange)(e.target.value)}
+        onChange={(e) => this.props.onChange(e.target.value)}
       />
     )
   }

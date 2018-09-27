@@ -1,5 +1,6 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 
+import Container from './Container'
 import SearchBar from './SearchBar'
 import SearchResults from './SearchResults'
 
@@ -14,10 +15,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <Fragment>
+      <Container>
         <SearchBar onChange={this.handleSearch} />
-        <SearchResults searchQuery={this.searchQuery} />
-      </Fragment>
+        <SearchResults searchQuery={this.state.searchQuery} />
+      </Container>
     )
   }
 }
