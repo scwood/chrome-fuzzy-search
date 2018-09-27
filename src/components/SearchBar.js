@@ -13,14 +13,14 @@ export default class SearchBar extends Component {
   render() {
     return (
       <input
-        placeholder="Search tabs, bookmarks, etc."
+        placeholder="Go to tab, bookmark, etc."
         style={{
-          width: '100%',
           border: 'none',
-          padding: 7,
-          fontSize: 15,
-          'box-sizing': 'border-box',
-          '-moz-box-sizing': 'border-box',
+          boxSizing: 'border-box',
+          fontSize: 14,
+          outline: 'none',
+          padding: 10,
+          width: '100%',
         }}
         ref={(input) => (this.inputRef = input)}
         onChange={(e) => this.props.onChange(e.target.value)}

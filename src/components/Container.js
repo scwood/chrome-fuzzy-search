@@ -1,16 +1,20 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class Container extends Component {
-  static propTypes = {
-    children: PropTypes.array,
-  }
+const Container = ({children}) => (
+  <div
+    style={{
+      width: 500,
+      fontFamily: 'sans-serif',
+      fontSize: 14,
+    }}
+  >
+    {children}
+  </div>
+)
 
-  render() {
-    return (
-      <div style={{width: 500, fontSize: 15, overflow: 'hidden', padding: 10}}>
-        {this.props.children}
-      </div>
-    )
-  }
+Container.propTypes = {
+  children: PropTypes.node,
 }
+
+export default Container

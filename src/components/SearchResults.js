@@ -1,7 +1,8 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
 
 import chrome from '../lib/chrome'
+import TabRow from './TabRow'
 
 export default class SearchResults extends Component {
   static propTypes = {
@@ -10,6 +11,7 @@ export default class SearchResults extends Component {
 
   state = {
     tabs: [],
+    selectedTabIndex: 0,
   }
 
   componentDidMount() {
@@ -20,12 +22,13 @@ export default class SearchResults extends Component {
     if (this.props.searchQuery.trim() === '') {
       return []
     }
-    return this.state.tabs.filter(({url, title}) => {
-      return (
-        this.isPartialMatch(this.props.searchQuery, url) ||
-        this.isPartialMatch(this.props.searchQuery, title)
+    return this.state.tabs
+      .filter(
+        ({url, title}) =>
+          this.isPartialMatch(this.props.searchQuery, url) ||
+          this.isPartialMatch(this.props.searchQuery, title),
       )
-    })
+      .slice(0, 10)
   }
 
   isPartialMatch = (substring, string) => {
@@ -44,9 +47,12 @@ export default class SearchResults extends Component {
   }
 
   render() {
-    const filteredTabs = this.getFilteredTabs()
-    return filteredTabs.map(({title, id}) => {
-      return <Fragment key={id}>{title}</Fragment>
-    })
+    return this.getFilteredTabs().map((tab, i) => (
+      <TabRow
+        selected={this.state.selectedTabIndex === i}
+        key={tab.id}
+        tab={tab}
+      />
+    ))
   }
 }
