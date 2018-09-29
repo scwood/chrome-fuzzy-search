@@ -1,7 +1,17 @@
 import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
+import styled from 'styled-components'
 
-export default class SearchBar extends Component {
+const BorderlessInput = styled.input`
+  border: none;
+  box-sizing: border-box;
+  font-size: 14px;
+  outline: none;
+  padding: 10px;
+  width: 100%;
+`
+
+class SearchBar extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
   }
@@ -12,19 +22,13 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <input
-        placeholder="Go to tab, bookmark, etc."
-        style={{
-          border: 'none',
-          boxSizing: 'border-box',
-          fontSize: 14,
-          outline: 'none',
-          padding: 10,
-          width: '100%',
-        }}
-        ref={(input) => (this.inputRef = input)}
+      <BorderlessInput
+        placeholder="Go to tab..."
+        innerRef={(ref) => (this.inputRef = ref)}
         onChange={(e) => this.props.onChange(e.target.value)}
       />
     )
   }
 }
+
+export default SearchBar

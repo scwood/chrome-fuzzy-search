@@ -1,20 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-const Container = ({children}) => (
-  <div
-    style={{
-      width: 500,
-      fontFamily: 'sans-serif',
-      fontSize: 14,
-    }}
-  >
-    {children}
-  </div>
-)
-
-Container.propTypes = {
-  children: PropTypes.node,
-}
+const Container = styled.div`
+  width: 500px;
+  font-family: sans-serif;
+  font-size: 14px;
+`
 
 export default Container

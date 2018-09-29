@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 
 import Container from './Container'
 import SearchBar from './SearchBar'
-import SearchResults from './SearchResults'
+import SearchResultList from './SearchResultList'
 
-export default class App extends Component {
+class App extends Component {
   state = {
     searchQuery: '',
   }
@@ -17,8 +17,10 @@ export default class App extends Component {
     return (
       <Container>
         <SearchBar onChange={this.handleSearch} />
-        <SearchResults searchQuery={this.state.searchQuery} />
+        <SearchResultList searchQuery={this.state.searchQuery} />
       </Container>
     )
   }
 }
+
+export default App
