@@ -1,8 +1,17 @@
 import React, {Component} from 'react'
+import {injectGlobal} from 'styled-components'
 
 import Container from './Container'
 import SearchBar from './SearchBar'
 import SearchResultList from './SearchResultList'
+
+injectGlobal`
+  body {
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+  }
+`
 
 class App extends Component {
   state = {

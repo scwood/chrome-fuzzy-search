@@ -10,7 +10,6 @@ const activateTab = (tab) => {
   return new Promise((resolve) => {
     const updateTab = () => {
       chrome.tabs.update(tab.id, {active: true}, resolve)
-      window.close()
     }
     chrome.windows.getCurrent((window) => {
       if (tab.windowId !== window.id) {

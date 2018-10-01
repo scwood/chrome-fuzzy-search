@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {PropTypes} from 'prop-types'
 import styled from 'styled-components'
 
@@ -25,29 +25,20 @@ const Favicon = styled.img.attrs({
   margin-left: 7px;
 `
 
-class SearchResult extends Component {
-  static propTypes = {
-    selected: PropTypes.bool,
-    tab: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      favIconUrl: PropTypes.string,
-    }),
-    onClick: PropTypes.func.isRequired,
-  }
+const SearchResult = ({selected, onClick, tab: {title, favIconUrl}}) => (
+  <TruncatedTextWithBackground selected={selected} onClick={onClick}>
+    <Favicon src={favIconUrl || defaultFavicon} />
+    {title}
+  </TruncatedTextWithBackground>
+)
 
-  render() {
-    const {
-      selected,
-      onClick,
-      tab: {title, favIconUrl},
-    } = this.props
-    return (
-      <TruncatedTextWithBackground selected={selected} onClick={onClick}>
-        <Favicon src={favIconUrl || defaultFavicon} />
-        {title}
-      </TruncatedTextWithBackground>
-    )
-  }
+SearchResult.propTypes = {
+  selected: PropTypes.bool,
+  tab: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    favIconUrl: PropTypes.string,
+  }),
+  onClick: PropTypes.func.isRequired,
 }
 
 export default SearchResult

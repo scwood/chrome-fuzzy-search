@@ -4,6 +4,7 @@ import {PropTypes} from 'prop-types'
 import chrome from '../lib/chrome'
 import SearchResult from './SearchResult'
 import Keybinds from './Keybinds'
+import getSimilarityScore from '../lib/getSimilarityScore'
 
 class SearchResultList extends Component {
   static propTypes = {
@@ -37,36 +38,26 @@ class SearchResultList extends Component {
   }
 
   getFilteredTabs = (tabs, searchQuery) => {
-    if (searchQuery.trim() === '') {
-      return []
-    }
-    return tabs
-      .filter(
-        ({url, title}) =>
-          this.isPartialMatch(this.props.searchQuery, url) ||
-          this.isPartialMatch(this.props.searchQuery, title),
-      )
-      .slice(0, 10)
-  }
-
-  isPartialMatch = (substring, string) => {
-    substring = substring.toLowerCase()
-    string = string.toLowerCase()
-    let i = 0
-    for (let j = 0; j < string.length; j++) {
-      if (string.charAt(j) === substring.charAt(i)) {
-        i++
-      }
-      if (i === substring.length) {
-        return true
-      }
-    }
-    return false
+    return searchQuery.trim() === ''
+      ? []
+      : tabs
+          .map((tab) => ({
+            tab,
+            score: Math.max(
+              getSimilarityScore(tab.title, searchQuery),
+              getSimilarityScore(this.stripHttpWww(tab.url), searchQuery),
+            ),
+          }))
+          .filter(({score}) => score > 0)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 10)
+          .map(({tab}) => tab)
   }
 
   handleEnter = () => {
     const selectedTab = this.state.filteredTabs[this.state.selectedTabIndex]
     chrome.activateTab(selectedTab)
+    window.close()
   }
 
   handleUp = () => {
@@ -79,6 +70,10 @@ class SearchResultList extends Component {
     if (this.state.selectedTabIndex < this.state.filteredTabs.length - 1) {
       this.setState({selectedTabIndex: this.state.selectedTabIndex + 1})
     }
+  }
+
+  stripHttpWww = (url) => {
+    return url.replace(/^https?:\/\/(www\.)?/, '')
   }
 
   render() {
