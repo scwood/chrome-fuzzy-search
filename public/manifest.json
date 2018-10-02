@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Getting Started Example",
+  "name": "Fuzzy Tab Switcher",
   "version": "1.0",
-  "description": "Build an Extension!",
+  "description": "Switch between tabs in your browser like you'd switch between files in your editor.",
   "permissions": [
     "tabs"
   ],

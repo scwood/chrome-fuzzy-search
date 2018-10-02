@@ -25,21 +25,26 @@ class Keybinds extends Component {
   }
 
   handleKeydown = (event) => {
+    let action
     switch (event.keyCode) {
       case KEYS.ENTER:
-        this.props.onEnter()
+        action = this.props.onEnter
         break
       case KEYS.UP:
-        this.props.onUp()
+        action = this.props.onUp
         break
       case KEYS.P:
-        event.ctrlKey && this.props.onUp()
+        action = event.ctrlKey && this.props.onUp
         break
       case KEYS.DOWN:
-        this.props.onDown()
+        action = this.props.onDown
         break
       case KEYS.N:
-        event.ctrlKey && this.props.onDown()
+        action = event.ctrlKey && this.props.onDown
+    }
+    if (action) {
+      action()
+      event.preventDefault()
     }
   }
 
