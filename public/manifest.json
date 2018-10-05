@@ -1,15 +1,15 @@
 {
   "manifest_version": 2,
-  "name": "Fuzzy Tab Switcher",
-  "version": "1.0",
-  "description": "Switch between tabs in your browser like you'd switch between files in your editor.",
+  "name": "Fuzzy Tab Finder",
+  "version": "1.0.0",
+  "description": "Navigate between open tabs quickly",
   "permissions": [
     "tabs"
   ],
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
   },
   "browser_action": {
     "default_popup": "index.html"
