@@ -8,9 +8,7 @@ const getTabs = (options = {}) => {
 
 const activateTab = (tab) => {
   return new Promise((resolve) => {
-    const updateTab = () => {
-      chrome.tabs.update(tab.id, {active: true}, resolve)
-    }
+    const updateTab = () => chrome.tabs.update(tab.id, {active: true}, resolve)
     chrome.windows.getCurrent((window) => {
       if (tab.windowId !== window.id) {
         chrome.windows.update(tab.windowId, {focused: true}, updateTab)

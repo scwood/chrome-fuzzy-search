@@ -56,8 +56,7 @@ class SearchResultList extends Component {
 
   handleEnter = () => {
     const selectedTab = this.state.filteredTabs[this.state.selectedTabIndex]
-    chrome.activateTab(selectedTab)
-    window.close()
+    chrome.activateTab(selectedTab).then(window.close)
   }
 
   handleUp = () => {
